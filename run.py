@@ -37,7 +37,7 @@ conn_str = (
 cnxn = pyodbc.connect(conn_str)
 cursor = cnxn.cursor()
 cursor.execute("SELECT * FROM [SCORE_TEMPRANA].DBO.TEMP_LISTA_AUNA")
+cursor.execute("SELECT * FROM [SCORE_TEMPRANA].DBO.TEMP_IVR_AUNA")
 row = cursor.fetchone() 
 print(row)
-
 cnxn.close()

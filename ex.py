@@ -2,7 +2,8 @@ import pandas as pd
 import pyodbc 
 import connectorx as cx
 import time
-
+from datetime import date, datetime
+import os
 # mssql
 # MSSQL_HOST=192.168.30.51
 # MSSQL_PORT=1433
@@ -21,9 +22,18 @@ sql_querys_sheet = {"IVR":"SELECT * FROM [SCORE_TEMPRANA].DBO.TEMP_IVR_AUNA",
 
 def generate_excel(db_url, sql_querys_sheet ):
 
-    start_time = time.time()
+    now = datetime.now()
+    today = date.today().strftime("%Y%m%d")
+    name = today + r'_LISTA_AUNA'
+    folder = r'C:\\Users\\lmagallanes\\OneDrive\\LISTA_AUNA\\'
+    final_name = folder + name + '.xlsx'
 
-    writer = pd.ExcelWriter('LISTA AUNA.xlsx', engine='xlsxwriter')
+    files = os.listdir(r'C:\\Users\\lmagallanes\\OneDrive\\LISTA_AUNA\\')
+    if len(files) != 1:
+        final_name = folder + name + '_' + str(len(files)) + '.xlsx'
+
+    writer = pd.ExcelWriter(final_name, engine='xlsxwriter')
+
 
     for sheet,sql_query  in sql_querys_sheet.items():
 
@@ -50,7 +60,9 @@ def generate_excel(db_url, sql_querys_sheet ):
 
     writer.close()
 
-    print('Read_sql time for table 1: {:.1f}'.format(time.time() - start_time))
+
+    time_diff = now - datetime.now()
+    print('Execution: {:.1f}'.format(time_diff.total_seconds()))
 
 
 generate_excel(db_url, sql_querys_sheet)

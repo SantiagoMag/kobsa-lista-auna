@@ -1,3 +1,5 @@
+import pyodbc 
+
 sql1 = """
     USE [SCORE_TEMPRANA];
     exec [dbo].[sp_bulk_score_temprana];

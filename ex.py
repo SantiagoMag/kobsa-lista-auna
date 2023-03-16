@@ -21,14 +21,13 @@ sql_querys_sheet = {"IVR":"SELECT * FROM [SCORE_TEMPRANA].DBO.TEMP_IVR_AUNA",
 
 
 def generate_excel(db_url, sql_querys_sheet ):
-
     now = datetime.now()
     today = date.today().strftime("%Y%m%d")
     name = today + r'_LISTA_AUNA'
-    folder = r'C:\\Users\\lmagallanes\\OneDrive\\LISTA_AUNA\\'
+    folder = r'D:\\KOBSA\\OneDrive\\LISTA_AUNA\\'
     final_name = folder + name + '.xlsx'
 
-    files = os.listdir(r'C:\\Users\\lmagallanes\\OneDrive\\LISTA_AUNA\\')
+    files = os.listdir(r'D:\\KOBSA\\OneDrive\\LISTA_AUNA\\')
     if len(files) != 1:
         final_name = folder + name + '_' + str(len(files)) + '.xlsx'
 
